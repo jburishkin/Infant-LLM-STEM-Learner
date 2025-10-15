@@ -1,7 +1,3 @@
-<p align="center">
-  <img src="assets/banner.png" alt="Infant LLM — STEM Learner Banner" width="100%">
-</p>
-
 # 🧠 Infant LLM v6 — STEM Learner
 
 > An evolving local neural assistant that learns **Science, Technology, Engineering, and Math (STEM)** directly from your input.  
