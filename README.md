@@ -137,7 +137,8 @@ Contributions are welcome!
 Open an issue or PR to add:
 - new learning features  
 - improved STEM understanding  
-- UI enhancements  
+- UI enhancements
+- SSO login
 - or better model persistence  
 
 ---
