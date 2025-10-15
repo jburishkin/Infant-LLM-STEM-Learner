@@ -9,16 +9,6 @@
 
 ---
 
-### 🎥 See It in Action
-
-| Chat & Teach | Memory & STEM Context |
-|:-------------:|:--------------------:|
-| ![Chat Demo](https://github.com/yourusername/infant-llm/assets/demo-chat.gif) | ![Memory Demo](https://github.com/yourusername/infant-llm/assets/demo-memory.gif) |
-
-*(Replace these with your actual `.gif` or `.png` files once uploaded to your repo’s `/assets/` folder.)*
-
----
-
 ## 🚀 Overview
 
 **Infant LLM v6** is a lightweight, self-growing language model that starts with no predefined knowledge.  
