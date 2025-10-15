@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="assets/banner.png" alt="Infant LLM — STEM Learner Banner" width="100%">
+  <img src="assets/STEMLEARNER.png" alt="Infant LLM — STEM Learner Banner" width="100%">
 </p>
 
 # 🧠 Infant LLM v6 — STEM Learner
