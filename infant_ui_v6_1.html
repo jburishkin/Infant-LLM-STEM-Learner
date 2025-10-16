@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8"/>
+<title>Infant LLM v6.1 — STEM Learner</title>
+<link id="favicon" rel="icon" type="image/svg+xml" href="">
+<style>
+:root{ --bg:#0f1724; --card:#0b1220; --muted:#9aa4b2; --accent:#6ee7b7; }
+*{ box-sizing:border-box; }
+body{
+  margin:0; font-family:Inter,system-ui,"Segoe UI",Roboto,sans-serif;
+  background:#f1f5f9; color:#0f1724; display:flex; flex-direction:column; height:100vh;
+}
+header{
+  background:linear-gradient(90deg,#00416A 0%,#E4E5E6 100%);
+  color:#fff; padding:24px; text-align:center; box-shadow:0 2px 10px rgba(0,0,0,0.25);
+}
+header h1{ margin:0; font-size:2em; font-weight:600; }
+header p{ margin:6px 0; font-size:1.05em; }
+.wrap{ display:flex; gap:16px; padding:16px; height:calc(100vh - 140px); }
+.sidebar{
+  width:320px; background:#ffffff; border-radius:12px; padding:14px;
+  box-shadow:0 10px 25px rgba(16,24,40,.07); overflow:auto;
+}
+.content{ flex:1; display:flex; flex-direction:column; gap:12px; }
+.card{
+  background:#ffffff; border-radius:12px; padding:14px; box-shadow:0 10px 25px rgba(16,24,40,.07);
+}
+#chat{ flex:1; overflow:auto; padding:8px; }
+.msg{
+  max-width:72%; margin:8px 0; padding:10px 14px; border-radius:14px; line-height:1.35;
+  box-shadow:0 6px 16px rgba(16,24,40,.06);
+}
+.me{ margin-left:auto; background:#dcfce7; color:#14532d; }
+.bot{ margin-right:auto; background:#e0f2fe; color:#0c4a6e; }
+.hint{ margin-left:36px; font-size:13px; color:#64748b; }
+.row{ display:flex; gap:8px; }
+input,select{
+  width:100%; padding:10px; border:1px solid #cbd5e1; border-radius:10px;
+}
+button{
+  padding:10px 14px; border:none; border-radius:10px; background:#4b6cb7; color:#fff; cursor:pointer;
+}
+button:hover{ background:#182848; }
+code{ background:#f3f4f6; padding:2px 6px; border-radius:6px; }
+ul{ margin:8px 0 0 18px; padding:0; }
+footer{
+  background:#182848; color:#e2e8f0; text-align:center; padding:10px 0; font-size:0.9em;
+  border-top:2px solid #00416A; box-shadow:0 -2px 8px rgba(0,0,0,0.2);
+}
+footer i{ color:#93c5fd; }
+</style>
+
+<script>
+function setFavicon(mode){
+  const blueBrain="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='30' fill='%2300416A'/%3E%3Ctext y='50%25' x='50%25' text-anchor='middle' dominant-baseline='central' font-size='36' fill='%23E4E5E6'%3E🧠%3C/text%3E%3C/svg%3E";
+  const blueGear="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='30' fill='%2300416A'/%3E%3Ctext y='50%25' x='50%25' text-anchor='middle' dominant-baseline='central' font-size='36' fill='%23E4E5E6'%3E⚙️%3C/text%3E%3C/svg%3E";
+  document.getElementById("favicon").href = (mode==="serious")?blueGear:blueBrain;
+}
+function updateFooter(mode){
+  const ft=document.getElementById("footertext");
+  ft.innerHTML=(mode==="serious")
+    ?"⚙️ Infant LLM v6.1 — <i>STEM Learner</i><br>Powered by PyTorch + Flask | Runs locally, learns from you"
+    :"🧠 Infant LLM v6.1 — <i>STEM Learner</i><br>Powered by PyTorch + Flask | Runs locally, learns from you";
+}
+function bubble(text,who){
+  const div=document.createElement("div");
+  div.className="msg "+(who==="me"?"me":"bot");
+  div.innerHTML=text;
+  const chat=document.getElementById("chat");
+  chat.appendChild(div); chat.scrollTop=chat.scrollHeight;
+}
+function hint(text){
+  const div=document.createElement("div");
+  div.className="hint"; div.innerHTML="Memory hint: "+text;
+  const chat=document.getElementById("chat");
+  chat.appendChild(div); chat.scrollTop=chat.scrollHeight;
+}
+function send(){
+  const txt=document.getElementById("msg").value.trim(); if(!txt) return;
+  const temp=parseFloat(document.getElementById("temp").value);
+  const personality=document.getElementById("personality").value;
+  const pref=document.getElementById("pref").value;
+  bubble("<b>You:</b> "+txt,"me");
+  fetch("/chat",{method:"POST",headers:{"Content-Type":"application/json"},
+    body:JSON.stringify({msg:txt,temperature:temp,personality:personality,prefer:pref})})
+  .then(r=>r.json())
+  .then(j=>{
+    if(j.memory&&j.memory.length>0){ j.memory.forEach(m=>hint("["+m.type+"] "+m.text)); }
+    bubble("<b>Infant:</b> "+j.reply,"bot");
+    if(j.updated_memory) refreshMemory();
+  });
+  document.getElementById("msg").value="";
+}
+function refreshMemory(){
+  fetch("/memlist").then(r=>r.json()).then(j=>{
+    const box=document.getElementById("memlist");
+    if(!j.items||j.items.length===0){ box.innerHTML="<i>Empty</i>"; return; }
+    box.innerHTML=j.items.map(it=>`<div>[${it.type}] ${it.text}</div>`).join("");
+  });
+}
+function clearMemory(){
+  if(!confirm("Are you sure you want to clear ALL memory?")) return;
+  fetch("/clear_memory", {method:"POST"})
+  .then(r=>r.json())
+  .then(j=>{
+    alert(j.reply);
+    refreshMemory();
+  });
+}
+window.onload=function(){
+  refreshMemory();
+  const p=document.getElementById("personality").value;
+  setFavicon(p); updateFooter(p);
+};
+</script>
+</head>
+
+<body>
+<header>
+  <h1>Infant LLM v6.1 — STEM Learner</h1>
+  <p><b>An evolving neural assistant that learns Science, Technology, Engineering, and Math directly from your input.</b></p>
+  <p>Teach it facts, equations, and code — it remembers, reasons, and grows over time.</p>
+</header>
+
+<div class="wrap">
+  <aside class="sidebar">
+    <div class="card">
+      <h3>Getting Started</h3>
+      <p><b>Commands</b></p>
+      <ul>
+        <li><code>learn &lt;text&gt;</code></li>
+        <li><code>learn math: 1+1=2</code></li>
+        <li><code>learn science: water boils at 100 °C</code></li>
+        <li><code>learn coding: print("hi")</code></li>
+        <li><code>memory &lt;query or type&gt;</code> (e.g., <code>memory math</code>)</li>
+      </ul>
+      <p><b>Examples</b></p>
+      <ul><li>what is 2+3=</li><li>python loop example</li><li>describe water</li></ul>
+    </div>
+
+    <div class="card">
+      <h3>Settings</h3>
+      <label>Personality</label>
+      <select id="personality" onchange="setFavicon(this.value);updateFooter(this.value)">
+        <option value="playful" selected>Playful</option>
+        <option value="serious">Serious</option>
+      </select><br/><br/>
+      <label>Creativity (temperature): <span id="temp_val">0.9</span></label>
+      <input type="range" id="temp" min="0.1" max="2.0" step="0.1" value="0.9"
+        oninput="document.getElementById('temp_val').innerText=this.value"><br/><br/>
+      <label>Prefer knowledge type</label>
+      <select id="pref">
+        <option value="any" selected>Any</option>
+        <option value="math">Math</option>
+        <option value="science">Science</option>
+        <option value="coding">Coding</option>
+        <option value="engineering">Engineering</option>
+        <option value="technology">Technology</option>
+        <option value="general">General</option>
+      </select>
+    </div>
+
+    <div class="card">
+      <h3>About Infant LLM v6.1</h3>
+      <p><b>Infant LLM</b> is a self-learning assistant for <b>Science, Technology, Engineering, and Math</b>.</p>
+      <p>Teach new concepts, equations, or code snippets — it will remember, reason, and evolve.</p>
+      <p><i>STEM + Curiosity = Growth.</i></p>
+    </div>
+
+    <div class="card">
+      <h3>Memory (top 30)</h3>
+      <div id="memlist" style="max-height:260px;overflow:auto;font-size:14px;"></div>
+      <div style="display:flex;gap:8px;margin-top:8px;">
+        <button onclick="refreshMemory()">Refresh</button>
+        <button style="background:#dc2626;" onclick="clearMemory()">🧹 Clear Memory</button>
+      </div>
+    </div>
+  </aside>
+
+  <main class="content">
+    <div id="chat" class="card"></div>
+    <div class="card">
+      <div class="row">
+        <input id="msg" placeholder="Ask or teach… e.g., 'what is 2+3=' or 'learn math: 2+2=4'" autofocus/>
+        <button onclick="send()">Send</button>
+      </div>
+    </div>
+  </main>
+</div>
+
+<footer>
+  <p id="footertext">🧠 Infant LLM v6.1 — <i>STEM Learner</i><br>
+  Powered by PyTorch + Flask | Runs locally, learns from you</p>
+</footer>
+</body>
+</html>
