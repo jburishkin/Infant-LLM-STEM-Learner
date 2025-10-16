@@ -12,7 +12,7 @@
 ### 🎥 See It in Action
 
 <p align="center">
-  <img src="https://github.com/jburishkin/Infant-LLM-STEM-Learner/blob/main/STEMLEARNER.png" alt="Infant LLM — STEM Learner Banner" width="100%">
+  <img src="https://github.com/jburishkin/Infant-LLM-STEM-Learner/blob/main/STEMLEARNER.png" alt="Infant LLM — STEM Learner In Action" width="30%">
 </p>
 
 *(Replace these with your actual `.gif` or `.png` files once uploaded to your repo’s `/assets/` folder.)*
