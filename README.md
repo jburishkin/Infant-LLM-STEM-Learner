@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://github.com/jburishkin/Infant-LLM-STEM-Learner/blob/main/STEMLEARNER.png" alt="Infant LLM — STEM Learner Banner" width="100%">
+  <img src="https://github.com/jburishkin/Infant-LLM-STEM-Learner/blob/main/STEMLEARNER.png" alt="Infant LLM — STEM Learner Banner" width="80%">
 </p>
 
 # 🧠 Infant LLM v6 — STEM Learner
@@ -12,7 +12,7 @@
 ### 🎥 See It in Action
 
 <p align="center">
-  <img src="https://github.com/jburishkin/Infant-LLM-STEM-Learner/blob/main/InfLM6_1_use.png" alt="Infant LLM — STEM Learner In Action" width="50%">
+  <img src="https://github.com/jburishkin/Infant-LLM-STEM-Learner/blob/main/InfLM6_1_use.png" alt="Infant LLM — STEM Learner In Action" width="70%">
 </p>
 
 ---
