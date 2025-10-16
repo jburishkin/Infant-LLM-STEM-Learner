@@ -12,7 +12,7 @@
 ### 🎥 See It in Action
 
 <p align="center">
-  <img src="https://github.com/jburishkin/Infant-LLM-STEM-Learner/blob/main/InfLM6_1_use.png" alt="Infant LLM — STEM Learner In Action" width="30%">
+  <img src="https://github.com/jburishkin/Infant-LLM-STEM-Learner/blob/main/InfLM6_1_use.png" alt="Infant LLM — STEM Learner In Action" width="50%">
 </p>
 
 ---
