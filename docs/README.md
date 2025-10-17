@@ -69,7 +69,7 @@ PRs welcome! Please retain attribution to **Jonathan Burishkin** in derivative w
 - v6.7 — Collaborative cloud edition
 
 ## 👨‍💻 About the Author
-**Jonathan Burishkin** — IT Systems Engineer @ Aerospace Defense & Industry, former K–12 IT Director in Virginia.
+**Jonathan Burishkin** — IT Systems Engineer @ Aerospace Defense & Industry, former K–12 IT Director in Virginia.                                                         
 Maintainer: [github.com/jburishkin](https://github.com/jburishkin)
 
 ## 🧩 Built With
