@@ -1,4 +1,4 @@
-![Infant LLM Banner](graphics/BANNER.png)
+![Infant LLM Banner](infantLLM/graphics/BANNER.png)
 
 # Infant LLM v6.3 — STEM Learner
 
