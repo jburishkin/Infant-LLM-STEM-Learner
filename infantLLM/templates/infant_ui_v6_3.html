@@ -150,6 +150,42 @@
       chatbox.innerHTML = "";
       refreshMemory();
     }
+	
+function setThinking(state) {
+  const bar = document.getElementById("growth-bar");
+  const chatbox = document.querySelector(".chatbox");
+  if (state) {
+    bar.classList.add("thinking");
+    chatbox.classList.add("thinking");
+  } else {
+    bar.classList.remove("thinking");
+    chatbox.classList.remove("thinking");
+  }
+}
+
+// Example usage
+async function sendMessage() {
+  const input = document.getElementById("userInput");
+  const text = input.value.trim();
+  if (!text) return;
+
+  appendMessage(text, "user");
+  input.value = "";
+  setThinking(true);
+
+  const resp = await fetch("/chat", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ text })
+  });
+
+  const data = await resp.json();
+  setThinking(false);
+  appendMessage(data.reply, "infant");
+
+  if (data.updated_memory) refreshMemory();
+}
+
 
     growthMode.addEventListener("change", async () => {
       const manual = growthMode.value === "manual";
