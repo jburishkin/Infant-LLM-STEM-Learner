@@ -1,0 +1,29 @@
+Infant LLM v6.3 — How-To Guide
+==============================
+
+1) Run the app
+--------------
+$ bash setup.sh
+Open http://localhost:5000 (or your server's IP).
+
+2) Teach and ask
+----------------
+You: learn cats are mammals
+You: learn math: 1+1=2
+You: memory
+You: what are cats
+You: what is 2+3=
+
+3) Modes & Stages
+-----------------
+- Starts as 👶 Infant for new users (per IP)
+- Evolves through Child → Teenager → Adult
+- Auto-suggests evolution when maturity is high
+
+4) UI Tips
+----------
+- Enter to send, Shift+Enter for a new line
+- Clear Memory wipes knowledge and resets to Infant
+- Sidebar shows Growth Summary and version info (linked to GitHub)
+
+Created and maintained by Jonathan Burishkin
