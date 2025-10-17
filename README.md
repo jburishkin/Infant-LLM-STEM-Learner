@@ -1,4 +1,12 @@
-![Infant LLM Banner](infantLLM/graphics/BANNER.png)
+<p align="center">
+  <img src="infantLLM/graphics/BANNER.png" alt="Infant LLM Banner" width="80%">
+</p>
+
+<h1 align="center">Infant LLM v6.3 — STEM Learner</h1>
+
+<p align="center">
+  <em>A living AI experiment that grows through human teaching.</em>
+</p>
 
 # Infant LLM v6.3 — STEM Learner
 
