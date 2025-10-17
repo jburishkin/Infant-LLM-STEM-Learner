@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="docs/banner_image.png" alt="Infant LLM v6.3 — STEM Learner Banner" width="100%">
+  <img src="[https://github.com/jburishkin/Infant-LLM-STEM-Learner/blob/main/docs/banner_image.png]" alt="Infant LLM v6.3 — STEM Learner Banner" width="100%">
 </p>
 
 # 🧠 Infant LLM v6.3 — STEM Learner (Growth Stages Edition)
