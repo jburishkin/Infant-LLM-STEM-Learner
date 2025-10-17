@@ -1,0 +1,56 @@
+:root{
+  --bg:#f3f4f6;
+  --card:#ffffff;
+  --muted:#64748b;
+  --accent:#60a5fa;
+  --button:#0e0854;
+  --radius:12px;
+  --shadow:0 1px 4px rgba(0,0,0,0.08);
+  font-family:Inter,system-ui,sans-serif;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:#1e293b;display:flex;height:100vh;overflow:hidden}
+.container{display:flex;width:100%}
+.sidebar{width:300px;background:#fff;border-right:1px solid #e2e8f0;padding:16px;overflow-y:auto;position:fixed;height:100%}
+.chat-area{flex:1;margin-left:300px;display:flex;flex-direction:column;height:100vh;padding:20px;background:var(--accent)}
+.card{background:var(--card);padding:12px;border-radius:var(--radius);box-shadow:var(--shadow);margin-bottom:16px}
+.instructions ul{padding-left:18px;margin:6px 0}
+.title{text-align:center;margin-bottom:16px;background:var(--accent)}
+.title h1{margin:0;font-size:1.6em}
+.title .subtitle{color:var(--muted);margin-top:4px;font-size:.95em}
+
+#growth-bar{height:12px;background:#e2e8f0;border-radius:999px;overflow:hidden}
+#growth-fill{height:12px;width:0%;background:#60a5fa;border-radius:999px;transition:width .8s ease, background-color .6s ease, box-shadow .8s ease;box-shadow:0 0 10px rgba(96,165,250,.6)}
+.stage-text{font-weight:600;margin-top:6px;color:var(--muted)}
+
+.growth-controls{display:flex;flex-direction:column;gap:6px;margin:10px 0 16px}
+.growth-controls select{padding:4px 6px;border-radius:8px;background:#fff;border:1px solid #cbd5e1;color:#0f172a;font-size:.9em}
+.growth-controls select:disabled{background:#f1f5f9;cursor:not-allowed;opacity:.6}
+
+.memory-card #memlist{max-height:220px;overflow-y:auto;font-size:.9em;background:#f9fafb;padding:8px;border-radius:8px}
+.button-row{display:flex;gap:8px;margin-top:8px}
+button{border:none;border-radius:8px;padding:6px 12px;background:var(--accent);color:#fff;cursor:pointer;font-weight:600;transition:opacity .2s}
+button:hover{opacity:.9}
+button.danger{background:#dc2626}
+.github-btn{width:100%;background:linear-gradient(90deg,#3b82f6,#60a5fa);margin-top:10px}
+
+.chatbox{flex:1;overflow-y:auto;background:#f9fafb;border-radius:12px;padding:16px;box-shadow:inset 0 1px 3px rgba(0,0,0,.08);border:1px solid #e2e8f0}
+.msg{margin:8px 0;display:flex}
+.msg.user{justify-content:flex-end}
+.msg.user .bubble{background:#e2e8f0;color:#1f2937;border-radius:16px 16px 0 16px}
+.msg.infant{justify-content:flex-start}
+.msg.infant .bubble{background:#dbeafe;color:#1e3a8a;border-radius:16px 16px 16px 0}
+.bubble{max-width:70%;padding:10px 14px;box-shadow:var(--shadow)}
+
+.input-row{display:flex;margin-top:12px;gap:10px}
+.input-row input{flex:1;padding:10px 14px;border:1px solid #cbd5e1;border-radius:999px;font-size:1em;outline:none}
+.input-row input:focus{border-color:#3b82f6}
+.input-row button{border-radius:999px;padding:10px 18px;background:var(--button)}
+
+/* Stage-based shimmer (triggered only during learning) */
+@keyframes shimmer{0%{background-position:200% 0}100%{background-position:-200% 0}}
+#growth-fill.shimmer-once{animation:shimmer 3s linear forwards;background-size:200% 100%}
+#growth-fill.infant.shimmer-once{background:linear-gradient(90deg,#60a5fa,#93c5fd,#3b82f6,#60a5fa)}
+#growth-fill.child.shimmer-once{background:linear-gradient(90deg,#34d399,#6ee7b7,#10b981,#34d399)}
+#growth-fill.teenager.shimmer-once{background:linear-gradient(90deg,#a78bfa,#c4b5fd,#8b5cf6,#a78bfa)}
+#growth-fill.adult.shimmer-once{background:linear-gradient(90deg,#059669,#34d399,#10b981,#059669)}

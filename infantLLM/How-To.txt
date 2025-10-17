@@ -1,0 +1,50 @@
+How-To Guide — Infant LLM v6.3
+===================================
+
+1) Create and activate a Python virtual environment
+---------------------------------------------------
+Linux/macOS:
+  python3 -m venv infantenv
+  source infantenv/bin/activate
+
+Windows (PowerShell):
+  python -m venv infantenv
+  .\infantenv\Scripts\Activate.ps1
+
+2) Install dependencies
+-----------------------
+  pip install -r requirements.txt
+
+3) Run the server
+-----------------
+  python3 infantLM_v6_3.py
+
+Open your browser to: http://localhost:5000
+
+4) Teach and chat
+-----------------
+Type messages like:
+  learn cats are mammals
+  learn math: 2+2=4
+  what sound do dogs make?
+
+5) Growth controls
+------------------
+- Growth Mode: Auto → grows with learning; Manual → you pick the stage
+- Stage: Infant / Child / Teenager / Adult
+- The maturity bar shows slow, realistic progress.
+- In Auto mode, stages promote automatically when thresholds are reached.
+
+6) Reset memory
+---------------
+Click "Clear Memory" in the sidebar. This resets memory and returns to Infant.
+
+7) Files
+--------
+- session.json — persists stage/override/maturity/learned counters
+- memory.json — persists learned text and categories
+
+8) Deploy notes
+---------------
+- For production, consider running via gunicorn or a reverse proxy (nginx).
+- HTTPS is recommended if exposed publicly.
