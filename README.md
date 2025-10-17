@@ -1,3 +1,5 @@
+![Infant LLM Banner](graphics/BANNER.png)
+
 # Infant LLM v6.3 — STEM Learner
 
 *A living AI experiment that grows through human teaching.*
